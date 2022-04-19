@@ -121,7 +121,7 @@ class KtorfitClient(val ktorfit: Ktorfit) {
 
     private fun HttpRequestBuilder.handleQueries(requestData: RequestData): String {
         val queryNames = mutableListOf<String>()
-        requestData.queries.filter { it.type == QueryType.QUERYNAME }.forEach { entry ->
+        requestData.queries.filter { it.type == "QUERYNAME" }.forEach { entry ->
             when (val data = entry.data) {
                 is List<*> -> {
                     data.filterNotNull().forEach { dataEntry ->
@@ -154,26 +154,26 @@ class KtorfitClient(val ktorfit: Ktorfit) {
 
         queryNameUrl = ("?$queryNameUrl").takeIf { queryNameUrl.isNotEmpty() } ?: ""
 
-        requestData.queries.filter { it.type == QueryType.QUERY }.forEach { entry ->
+        requestData.queries.filter { it.type == "QUERY" }.forEach { entry ->
 
             when (val data = entry.data) {
                 is List<*> -> {
                     data.filterNotNull().forEach {
-                        setParameter(entry.encoded, entry.queryKey, it.toString())
+                        setParameter(entry.encoded, entry.key, it.toString())
                     }
                 }
                 is Array<*> -> {
                     data.filterNotNull().forEach {
-                        setParameter(entry.encoded, entry.queryKey, it.toString())
+                        setParameter(entry.encoded, entry.key, it.toString())
                     }
                 }
                 else -> {
-                    setParameter(entry.encoded, entry.queryKey, entry.data.toString())
+                    setParameter(entry.encoded, entry.key, entry.data.toString())
                 }
             }
         }
 
-        requestData.queries.filter { it.type == QueryType.QUERYMAP }.forEach { entry ->
+        requestData.queries.filter { it.type == "QUERYMAP" }.forEach { entry ->
             (entry.data as Map<*, *>).forEach {
                 setParameter(entry.encoded, it.key.toString(), it.value.toString())
             }
@@ -193,21 +193,21 @@ class KtorfitClient(val ktorfit: Ktorfit) {
                     }
                 }
 
-                requestData.fields.filter { it.type == FieldType.FIELD }.forEach { entry ->
+                requestData.fields.filter { it.type == "FIELD" }.forEach { entry ->
 
                     when (val data = entry.data) {
                         is List<*> -> {
                             data.filterNotNull().forEach {
-                                append(entry.encoded, entry.queryKey, it as String)
+                                append(entry.encoded, entry.key, it as String)
                             }
                         }
                         else -> {
-                            append(entry.encoded, entry.queryKey, entry.data.toString())
+                            append(entry.encoded, entry.key, entry.data.toString())
                         }
                     }
                 }
 
-                requestData.fields.filter { it.type == FieldType.FIELDMAP }.forEach { entry ->
+                requestData.fields.filter { it.type == "FIELDMAP" }.forEach { entry ->
                     (entry.data as Map<*, *>).forEach {
                         append(entry.encoded, it.key.toString(), it.value.toString())
                     }

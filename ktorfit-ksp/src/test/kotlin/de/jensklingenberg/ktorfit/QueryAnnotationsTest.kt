@@ -54,7 +54,6 @@ interface TestService {
     }
 
 
-
     @Test
     fun testQuery() {
 
@@ -234,7 +233,7 @@ interface TestService {
         )
 
 
-        val expectedQueriesArgumentText =  "queries = listOf(QueryData(false,testQuery,\"name\",QueryType.QUERY),\n" +
+        val expectedQueriesArgumentText = "queries = listOf(QueryData(false,testQuery,\"name\",QueryType.QUERY),\n" +
                 "            QueryData(false,testQueryName,\"\",QueryType.QUERYNAME),\n" +
                 "            QueryData(false,name,\"\",QueryType.QUERYMAP)),"
 

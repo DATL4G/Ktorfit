@@ -121,7 +121,7 @@ interface TestService {
         )
 
         val compilation = KotlinCompilation().apply {
-            sources = listOf(httpReqBuilderSource,source)
+            sources = listOf(httpReqBuilderSource, source)
             inheritClassPath = true
             symbolProcessorProviders = listOf(KtorfitProcessorProvider())
             kspIncremental = true
@@ -152,7 +152,7 @@ interface TestService {
         )
 
         val compilation = KotlinCompilation().apply {
-            sources = listOf(httpReqBuilderSource,source)
+            sources = listOf(httpReqBuilderSource, source)
             inheritClassPath = true
             symbolProcessorProviders = listOf(KtorfitProcessorProvider())
             kspIncremental = true

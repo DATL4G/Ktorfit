@@ -22,7 +22,7 @@ fun getFieldArgumentsText(params: List<ParameterData>): String {
         val encoded = query.encoded
         val data = myParam.name
         val queryKey = query.value.surroundWith("\"")
-        val type = "FieldType.FIELD"
+        val type = "\"FIELD\""
 
         "FieldData($encoded,$data,$queryKey,$type)"
     }
@@ -34,7 +34,7 @@ fun getFieldArgumentsText(params: List<ParameterData>): String {
         val encoded = queryMap.encoded
         val data = myParam.name
         val keyName = "\"\""
-        val type = "FieldType.FIELDMAP"
+        val type = "\"FIELDMAP\""
 
         "FieldData($encoded,$data,$keyName,$type)"
     }

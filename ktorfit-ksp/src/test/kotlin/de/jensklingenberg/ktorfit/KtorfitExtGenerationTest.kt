@@ -64,7 +64,7 @@ interface SecondTestService {
         )
 
         val compilation = KotlinCompilation().apply {
-            sources = listOf(source1,source2)
+            sources = listOf(source1, source2)
             inheritClassPath = true
             symbolProcessorProviders = listOf(KtorfitProcessorProvider())
             kspIncremental = true

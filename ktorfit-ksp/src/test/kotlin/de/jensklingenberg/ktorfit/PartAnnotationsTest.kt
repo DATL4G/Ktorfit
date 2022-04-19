@@ -149,7 +149,7 @@ interface TestService {
         )
 
 
-        val expectedPartsArgumentText =  "parts = mapOf(\"name\" to testPart)+name"
+        val expectedPartsArgumentText = "parts = mapOf(\"name\" to testPart)+name"
 
         val compilation = KotlinCompilation().apply {
             sources = listOf(source)

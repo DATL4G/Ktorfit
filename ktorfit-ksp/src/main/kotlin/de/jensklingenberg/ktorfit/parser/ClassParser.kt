@@ -23,10 +23,10 @@ private fun getImports(ksClassDeclaration: KSClassDeclaration): List<String> {
     importList.addIfAbsent("de.jensklingenberg.ktorfit.internal.KtorfitClient")
     importList.addIfAbsent("de.jensklingenberg.ktorfit.internal.RequestData")
     importList.addIfAbsent("de.jensklingenberg.ktorfit.internal.QueryData")
-    importList.addIfAbsent("de.jensklingenberg.ktorfit.internal.QueryType")
+   // importList.addIfAbsent("de.jensklingenberg.ktorfit.internal.QueryType")
     importList.addIfAbsent("de.jensklingenberg.ktorfit.internal.HeaderData")
     importList.addIfAbsent("de.jensklingenberg.ktorfit.internal.FieldData")
-    importList.addIfAbsent("de.jensklingenberg.ktorfit.internal.FieldType")
+    //importList.addIfAbsent("de.jensklingenberg.ktorfit.internal.FieldType")
 
     return importList.map { it.removePrefix("import ") }
 }

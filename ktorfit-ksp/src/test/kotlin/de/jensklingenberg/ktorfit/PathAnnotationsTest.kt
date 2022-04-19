@@ -15,8 +15,6 @@ import java.io.File
 class PathAnnotationsTest {
 
 
-
-
     @Test
     fun testFunctionWithGETAndPath() {
 

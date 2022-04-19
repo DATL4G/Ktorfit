@@ -53,7 +53,6 @@ interface TestService {
     }
 
 
-
     @Test
     fun whenFieldUsedWithoutFormEncoding_ThrowCompilationError() {
 
@@ -183,7 +182,7 @@ interface TestService {
         )
 
 
-        val expectedFieldsArgumentText =  "fields = listOf(FieldData(false,testField,\"name\",FieldType.FIELD),\n" +
+        val expectedFieldsArgumentText = "fields = listOf(FieldData(false,testField,\"name\",FieldType.FIELD),\n" +
                 "            FieldData(false,name,\"\",FieldType.FIELDMAP))"
 
         val compilation = KotlinCompilation().apply {
@@ -267,7 +266,6 @@ interface TestService {
         Truth.assertThat(result.exitCode).isEqualTo(KotlinCompilation.ExitCode.COMPILATION_ERROR)
         Assert.assertTrue(result.messages.contains(KtorfitError.FIELD_MAP_KEYS_MUST_BE_OF_TYPE_STRING))
     }
-
 
 
 }

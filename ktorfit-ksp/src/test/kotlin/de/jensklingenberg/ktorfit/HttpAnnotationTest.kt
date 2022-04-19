@@ -76,10 +76,10 @@ interface TestService {
     }
 
 
-
     @Test
     fun whenMultipleHttpMethodsFound_throwError() {
-        val source = SourceFile.kotlin("Source.kt", """
+        val source = SourceFile.kotlin(
+            "Source.kt", """
       package com.example.api
 
 import com.example.model.github.GithubFollowerResponseItem
@@ -100,7 +100,8 @@ interface GithubService {
     suspend fun test(): String
     
 }
-    """)
+    """
+        )
 
         val compilation = KotlinCompilation().apply {
             sources = listOf(source)
