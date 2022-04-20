@@ -76,8 +76,8 @@ class KtorfitClient(val ktorfit: Ktorfit) {
         requestData: RequestData
     ) {
 
-        handleHeaders(requestData)
-        handleFields(requestData)
+        handleHeaders(requestData.headers)
+        handleFields(requestData.fields)
         handleParts(requestData)
         this.method = HttpMethod.parse(requestData.method)
 
@@ -92,9 +92,9 @@ class KtorfitClient(val ktorfit: Ktorfit) {
         requestData.requestBuilder(this)
     }
 
-    private fun HttpRequestBuilder.handleHeaders(requestData: RequestData) {
+    private fun HttpRequestBuilder.handleHeaders(headerDataList: List<HeaderData>) {
         headers {
-            requestData.headers.forEach {
+            headerDataList.forEach {
                 when (val data = it.value) {
                     is List<*> -> {
                         data.filterNotNull().forEach { dataEntry ->
@@ -121,6 +121,8 @@ class KtorfitClient(val ktorfit: Ktorfit) {
 
     private fun HttpRequestBuilder.handleQueries(requestData: RequestData): String {
         val queryNames = mutableListOf<String>()
+//TODO:
+
         requestData.queries.filter { it.type == "QUERYNAME" }.forEach { entry ->
             when (val data = entry.data) {
                 is List<*> -> {
@@ -181,8 +183,8 @@ class KtorfitClient(val ktorfit: Ktorfit) {
         return queryNameUrl
     }
 
-    private fun HttpRequestBuilder.handleFields(requestData: RequestData) {
-        if (requestData.fields.isNotEmpty()) {
+    private fun HttpRequestBuilder.handleFields(fieldDataList: List<FieldData>) {
+        if (fieldDataList.isNotEmpty()) {
             val formParameters = Parameters.build {
 
                 fun append(encoded: Boolean, key: String, value: String) {
@@ -193,7 +195,7 @@ class KtorfitClient(val ktorfit: Ktorfit) {
                     }
                 }
 
-                requestData.fields.filter { it.type == "FIELD" }.forEach { entry ->
+                fieldDataList.filter { it.type == "FIELD" }.forEach { entry ->
 
                     when (val data = entry.data) {
                         is List<*> -> {
@@ -207,7 +209,7 @@ class KtorfitClient(val ktorfit: Ktorfit) {
                     }
                 }
 
-                requestData.fields.filter { it.type == "FIELDMAP" }.forEach { entry ->
+                fieldDataList.filter { it.type == "FIELDMAP" }.forEach { entry ->
                     (entry.data as Map<*, *>).forEach {
                         append(entry.encoded, it.key.toString(), it.value.toString())
                     }

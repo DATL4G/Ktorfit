@@ -1,7 +1,9 @@
 import de.jensklingenberg.ktorfit.Ktorfit
 import de.jensklingenberg.ktorfit.internal.KtorfitClient
+import de.jensklingenberg.ktorfit.internal.QueryData
 import de.jensklingenberg.ktorfit.internal.RequestData
 import io.ktor.client.*
+import io.ktor.client.engine.mock.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.runBlocking
@@ -12,14 +14,14 @@ class ClientTest {
 
     @Test
     fun testWithArray() {
-
+        MockEngine
 
         val ktorfit = Ktorfit("www.example.com/", HttpClient())
         val client = KtorfitClient(ktorfit)
 
         val requestData = RequestData("GET","posts",
             headers = emptyList(),
-            queries = emptyList(),
+            queries = listOf(QueryData(false,"testData","name","QUERY"),QueryData(false, listOf("foo","bar"),"name","QUERYNAME")),
             fields = emptyList(),
             parts = emptyMap(),
             bodyData = null,
