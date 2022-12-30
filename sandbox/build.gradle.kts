@@ -5,7 +5,7 @@ plugins {
 }
 
 version = "1.0-SNAPSHOT"
-val ktorVersion = "2.1.2"
+val ktorVersion = "2.1.3"
 
 ksp {
     arg("Ktorfit_Errors", "1")
